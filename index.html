@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jackson Services — Plumbing Service Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0F1F3D;
+    --navy2:   #132847;
+    --navy3:   #1A3460;
+    --orange:  #E8600A;
+    --orange2: #FF7722;
+    --text:    #E8EDF5;
+    --text2:   #A8B8D0;
+    --green:   #2ECC71;
+    --yellow:  #F39C12;
+    --red:     #E74C3C;
+    --border:  rgba(232,224,240,0.08);
+    --card:    rgba(19,40,71,0.85);
+    --card2:   rgba(26,52,96,0.6);
+  }
+
+  html, body {
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+  }
+
+  /* ── GRID SHELL ── */
+  #app {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    width: 100vw; height: 100vh;
+    gap: clamp(4px, 0.6vh, 10px);
+    padding: clamp(6px, 0.8vh, 14px) clamp(8px, 1vw, 18px);
+  }
+
+  /* ── HEADER ── */
+  #header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(4px, 0.5vh, 8px) clamp(8px, 1vw, 16px);
+    background: var(--card);
+    border-radius: 6px;
+    border-left: 4px solid var(--orange);
+    gap: 1vw;
+  }
+  .header-left { display: flex; align-items: center; gap: clamp(8px, 1vw, 18px); }
+  .logo-mark {
+    width: clamp(28px, 3.5vw, 52px);
+    height: clamp(28px, 3.5vw, 52px);
+    flex-shrink: 0;
+  }
+  .header-titles { display: flex; flex-direction: column; line-height: 1; }
+  .company-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(14px, 2.2vw, 34px);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .dept-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(9px, 1.3vw, 20px);
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+  .header-right { display: flex; align-items: center; gap: clamp(8px, 1.2vw, 20px); flex-shrink: 0; }
+  .header-stat {
+    display: flex; flex-direction: column; align-items: center;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+  .header-stat .hval {
+    font-size: clamp(16px, 2.2vw, 36px);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+  .header-stat .hlbl {
+    font-size: clamp(7px, 0.9vw, 13px);
+    font-weight: 700;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .mtd-badge {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(8px, 1vw, 15px);
+    font-weight: 800;
+    padding: clamp(3px, 0.4vh, 6px) clamp(6px, 0.8vw, 12px);
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .vsep {
+    width: 1px; height: clamp(22px, 3vh, 42px);
+    background: var(--border);
+  }
+
+  /* ── KPI ROW ── */
+  #kpi-row {
+    display: grid;
+    grid-template-columns: 2.4fr 1fr 1fr 1fr;
+    gap: clamp(4px, 0.6vw, 10px);
+  }
+  .kpi-card {
+    background: var(--card);
+    border-radius: 6px;
+    border-top: 4px solid var(--orange);
+    padding: clamp(6px, 0.8vh, 14px) clamp(8px, 1vw, 16px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(232,96,10,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .kpi-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(8px, 1vw, 14px);
+    font-weight: 700;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .kpi-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(20px, 3vw, 52px);
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+  }
+  .kpi-sub {
+    font-size: clamp(7px, 0.85vw, 12px);
+    font-weight: 700;
+    color: var(--text2);
+  }
+  /* wide KPI — goal card */
+  .kpi-goal .kpi-value { font-size: clamp(22px, 3.5vw, 60px); color: var(--orange); }
+  .goal-bar-wrap {
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    height: clamp(6px, 1vh, 14px);
+    overflow: hidden;
+    margin: clamp(3px, 0.4vh, 6px) 0;
+  }
+  .goal-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--orange2));
+    transition: width 0.8s ease;
+    position: relative;
+  }
+  .goal-bar-fill::after {
+    content: '';
+    position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 0 3px 3px 0;
+  }
+  .goal-row {
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .goal-pct {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(10px, 1.3vw, 20px);
+    font-weight: 900;
+    color: var(--orange);
+  }
+  .goal-target {
+    font-size: clamp(7px, 0.85vw, 12px);
+    color: var(--text2);
+    font-weight: 700;
+  }
+  .pill {
+    display: inline-flex; align-items: center;
+    padding: 1px clamp(4px,0.5vw,8px);
+    border-radius: 20px;
+    font-size: clamp(7px, 0.8vw, 11px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pill.green  { background: rgba(46,204,113,0.18); color: var(--green); }
+  .pill.yellow { background: rgba(243,156,18,0.18); color: var(--yellow); }
+  .pill.red    { background: rgba(231,76,60,0.18);  color: var(--red); }
+
+  /* ── MAIN BODY ── */
+  #main-body {
+    display: grid;
+    grid-template-columns: 1fr clamp(200px, 22vw, 360px);
+    gap: clamp(4px, 0.6vw, 10px);
+    min-height: 0;
+  }
+  #left-col {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: clamp(4px, 0.6vw, 10px);
+    min-height: 0;
+  }
+  .panel {
+    background: var(--card);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: clamp(4px, 0.5vh, 8px) clamp(8px, 1vw, 14px);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .panel-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(9px, 1.1vw, 16px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .sorted-badge {
+    background: rgba(232,96,10,0.15);
+    color: var(--orange);
+    font-size: clamp(7px, 0.75vw, 11px);
+    font-weight: 800;
+    padding: 2px clamp(4px, 0.5vw, 8px);
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(232,96,10,0.3);
+  }
+
+  /* ── DATA TABLE ── */
+  #table-panel { min-height: 0; }
+  .table-scroll { flex: 1; overflow: hidden; min-height: 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  thead th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(7px, 0.85vw, 12px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text2);
+    padding: clamp(3px, 0.4vh, 6px) clamp(6px, 0.7vw, 10px);
+    text-align: right;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+  }
+  thead th:first-child { text-align: left; }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,0.04); }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  tbody tr:nth-child(even):hover { background: rgba(255,255,255,0.05); }
+  tbody td {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(9px, 1.1vw, 16px);
+    font-weight: 700;
+    padding: clamp(3px, 0.35vh, 5px) clamp(6px, 0.7vw, 10px);
+    text-align: right;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  tbody td:first-child { text-align: left; font-weight: 800; }
+  .rank-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: clamp(14px, 1.5vw, 22px); height: clamp(14px, 1.5vw, 22px);
+    border-radius: 50%;
+    font-size: clamp(7px, 0.85vw, 12px);
+    font-weight: 900;
+    background: rgba(255,255,255,0.08);
+    color: var(--text2);
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+  .rank-num.gold   { background: rgba(255,215,0,0.2);  color: #FFD700; }
+  .rank-num.silver { background: rgba(192,192,192,0.2);color: #C0C0C0; }
+  .rank-num.bronze { background: rgba(205,127,50,0.2); color: #CD7F32; }
+  .tech-cell { display: flex; align-items: center; }
+  .rev-bar-cell { padding: clamp(3px, 0.35vh, 5px) clamp(6px, 0.7vw, 10px) !important; }
+  .mini-bar-row {
+    height: clamp(4px, 0.6vh, 8px);
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .mini-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--orange2));
+  }
+
+  /* ── BOTTOM PANELS ── */
+  #bottom-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: clamp(4px, 0.6vw, 10px);
+    height: clamp(100px, 14vh, 200px);
+    flex-shrink: 0;
+  }
+  .mini-panel {
+    background: var(--card);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .mini-panel .panel-header { padding: clamp(3px,0.4vh,6px) clamp(6px,0.8vw,12px); }
+  .mini-bars-body {
+    flex: 1;
+    padding: clamp(2px,0.3vh,5px) clamp(6px,0.8vw,12px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 0;
+  }
+  .mini-bar-item {
+    display: grid;
+    grid-template-columns: clamp(60px,8vw,110px) 1fr clamp(30px,4vw,60px);
+    align-items: center;
+    gap: clamp(3px, 0.4vw, 7px);
+  }
+  .mini-bar-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(7px, 0.8vw, 12px);
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mini-bar-track {
+    height: clamp(5px, 0.7vh, 10px);
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .mini-bar-fill2 {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+  .mini-bar-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(7px, 0.85vw, 12px);
+    font-weight: 900;
+    text-align: right;
+    color: var(--text);
+  }
+
+  /* ── RIGHT SIDEBAR ── */
+  #right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, 0.6vw, 10px);
+    min-height: 0;
+  }
+  .sidebar-panel {
+    background: var(--card);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* leaderboard */
+  .leader-body {
+    flex: 1;
+    padding: clamp(2px,0.3vh,5px) clamp(6px,0.8vw,12px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 0;
+  }
+  .leader-item {
+    display: flex; align-items: center;
+    gap: clamp(4px, 0.5vw, 8px);
+    padding: clamp(2px, 0.25vh, 4px) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .leader-item:last-child { border-bottom: none; }
+  .medal {
+    font-size: clamp(10px, 1.3vw, 20px);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .leader-info { flex: 1; min-width: 0; }
+  .leader-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(9px, 1.1vw, 17px);
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+  }
+  .leader-sub {
+    font-size: clamp(6px, 0.75vw, 10px);
+    color: var(--text2);
+    font-weight: 700;
+  }
+  .leader-rev {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(10px, 1.3vw, 20px);
+    font-weight: 900;
+    color: var(--orange);
+    flex-shrink: 0;
+    text-align: right;
+    line-height: 1;
+  }
+
+  /* sidebar chart */
+  .chart-body {
+    flex: 1;
+    padding: clamp(2px,0.3vh,5px) clamp(6px,0.8vw,12px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 0;
+  }
+  .chart-bar-item {
+    display: grid;
+    grid-template-columns: clamp(55px,7vw,100px) 1fr clamp(28px,3.5vw,55px);
+    align-items: center;
+    gap: clamp(3px, 0.4vw, 6px);
+  }
+  .chart-bar-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(7px, 0.85vw, 13px);
+    font-weight: 800;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .chart-bar-track {
+    height: clamp(6px, 0.8vh, 12px);
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .chart-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #2ECC71, #27AE60);
+    transition: width 0.6s ease;
+  }
+  .chart-bar-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(7px, 0.9vw, 13px);
+    font-weight: 900;
+    text-align: right;
+    color: var(--green);
+  }
+
+  /* ── FOOTER ── */
+  #footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: clamp(3px, 0.4vh, 6px) clamp(8px, 1vw, 16px);
+    background: var(--card);
+    border-radius: 6px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-left {
+    font-size: clamp(7px, 0.8vw, 11px);
+    font-weight: 700;
+    color: var(--text2);
+  }
+  .footer-left span { color: var(--orange); }
+  .footer-center {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(7px, 0.9vw, 13px);
+    font-weight: 800;
+    color: var(--text2);
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  .footer-right {
+    font-size: clamp(7px, 0.8vw, 11px);
+    font-weight: 700;
+    color: var(--text2);
+    text-align: right;
+    font-style: italic;
+  }
+
+  /* ── OVERLAY ── */
+  #overlay {
+    position: fixed; inset: 0;
+    background: var(--navy);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 1000;
+    gap: clamp(8px, 2vh, 24px);
+    transition: opacity 0.4s;
+  }
+  #overlay.hidden { opacity: 0; pointer-events: none; }
+  .spinner {
+    width: clamp(28px, 4vw, 52px);
+    height: clamp(28px, 4vw, 52px);
+    border: 3px solid rgba(232,96,10,0.2);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .overlay-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(14px, 2vw, 28px);
+    font-weight: 800;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  #error-msg {
+    color: var(--red);
+    font-size: clamp(10px, 1.2vw, 16px);
+    font-weight: 700;
+    display: none;
+    text-align: center;
+    max-width: 60vw;
+  }
+</style>
+</head>
+<body>
+
+<div id="overlay">
+  <div class="spinner"></div>
+  <div class="overlay-text">Loading Dashboard…</div>
+  <div id="error-msg"></div>
+</div>
+
+<div id="app">
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-left">
+      <svg class="logo-mark" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="hex-clip">
+            <polygon points="26,2 48,14 48,38 26,50 4,38 4,14"/>
+          </clipPath>
+        </defs>
+        <polygon points="26,2 48,14 48,38 26,50 4,38 4,14" fill="#E8600A"/>
+        <polygon points="26,8 44,18 44,36 26,46 8,36 8,18" fill="#0F1F3D"/>
+        <text x="26" y="34" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="900" font-size="22" fill="#E8600A">JS</text>
+      </svg>
+      <div class="header-titles">
+        <div class="company-name">Jackson Services</div>
+        <div class="dept-name">Plumbing Service</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-stat">
+        <span class="hval" id="h-techs">—</span>
+        <span class="hlbl">Technicians</span>
+      </div>
+      <div class="vsep"></div>
+      <div class="header-stat">
+        <span class="hval" id="h-jobs">—</span>
+        <span class="hlbl">Total Jobs</span>
+      </div>
+      <div class="vsep"></div>
+      <div class="mtd-badge">Month to Date</div>
+    </div>
+  </header>
+
+  <!-- KPI ROW -->
+  <div id="kpi-row">
+    <!-- Goal Card (wide) -->
+    <div class="kpi-card kpi-goal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div class="kpi-label">Revenue vs. Monthly Goal</div>
+        <span class="pill" id="goal-pill">—</span>
+      </div>
+      <div>
+        <div class="kpi-value" id="kpi-revenue">$0</div>
+        <div class="goal-bar-wrap">
+          <div class="goal-bar-fill" id="goal-bar" style="width:0%"></div>
+        </div>
+        <div class="goal-row">
+          <div class="goal-pct" id="goal-pct">0%</div>
+          <div class="goal-target" id="goal-target">Goal: $210,000</div>
+        </div>
+      </div>
+    </div>
+    <!-- KPI 2 -->
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Ticket</div>
+      <div class="kpi-value" id="kpi-avg-ticket">$0</div>
+      <div class="kpi-sub" id="kpi-avg-sub">Per completed job</div>
+    </div>
+    <!-- KPI 3 -->
+    <div class="kpi-card">
+      <div class="kpi-label">Total Jobs</div>
+      <div class="kpi-value" id="kpi-jobs">0</div>
+      <div class="kpi-sub" id="kpi-jobs-sub">Across all techs</div>
+    </div>
+    <!-- KPI 4 -->
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Close Rate</div>
+      <div class="kpi-value" id="kpi-close">0%</div>
+      <div class="kpi-sub" id="kpi-close-sub">Sold / Presented</div>
+    </div>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div id="main-body">
+    <div id="left-col">
+      <!-- TABLE PANEL -->
+      <div class="panel" id="table-panel">
+        <div class="panel-header">
+          <span class="panel-title">Technician Performance</span>
+          <span class="sorted-badge">↓ Sorted by Revenue</span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:22%;text-align:left;">Technician</th>
+                <th style="width:13%;">Revenue</th>
+                <th style="width:20%;">Revenue Bar</th>
+                <th style="width:10%;">Jobs</th>
+                <th style="width:12%;">Avg Ticket</th>
+                <th style="width:11%;">Close %</th>
+                <th style="width:12%;">Memberships</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- BOTTOM 3 MINI PANELS -->
+      <div id="bottom-panels">
+        <div class="mini-panel">
+          <div class="panel-header">
+            <span class="panel-title">Avg Ticket</span>
+          </div>
+          <div class="mini-bars-body" id="panel-avg-ticket"></div>
+        </div>
+        <div class="mini-panel">
+          <div class="panel-header">
+            <span class="panel-title">Jobs Completed</span>
+          </div>
+          <div class="mini-bars-body" id="panel-jobs"></div>
+        </div>
+        <div class="mini-panel">
+          <div class="panel-header">
+            <span class="panel-title">Memberships Sold</span>
+          </div>
+          <div class="mini-bars-body" id="panel-memberships"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <div id="right-sidebar">
+      <!-- LEADERBOARD -->
+      <div class="sidebar-panel">
+        <div class="panel-header">
+          <span class="panel-title">Revenue Leaders</span>
+          <span class="sorted-badge">Top Performers</span>
+        </div>
+        <div class="leader-body" id="leader-body"></div>
+      </div>
+      <!-- SIDEBAR CHART — Close Rate -->
+      <div class="sidebar-panel">
+        <div class="panel-header">
+          <span class="panel-title">Close Rate Ranking</span>
+        </div>
+        <div class="chart-body" id="chart-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-left"><span>Jackson Services</span> · Plumbing Service · East Alabama &amp; West Georgia</div>
+    <div class="footer-center" id="footer-time">Last updated: —</div>
+    <div class="footer-right">Built to serve. Built to last.</div>
+  </footer>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════════════════════════════
+const MONTHLY_GOAL = 210000;
+
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS86maxFBdZphtkCEOMqfUyPuxe-Hm7YxR9dX9lCtlctoaSjFD3_zogc1no5hZ1_r73fkrC0VAwHVU/pub?output=csv';
+
+const REFRESH_MS = 60 * 60 * 1000; // 60 minutes
+
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+function fmt$(n) {
+  if (!isFinite(n)) return '$0';
+  return '$' + Math.round(n).toLocaleString();
+}
+function fmtPct(n) {
+  if (!isFinite(n)) return '0%';
+  return Math.round(n) + '%';
+}
+function clamp(val, lo, hi) { return Math.min(hi, Math.max(lo, val)); }
+
+function parseNum(s) {
+  if (!s) return 0;
+  return parseFloat(String(s).replace(/[$,%]/g, '').trim()) || 0;
+}
+
+function pillClass(pct) {
+  if (pct >= 90) return 'green';
+  if (pct >= 65) return 'yellow';
+  return 'red';
+}
+
+function medalsFor(i) {
+  if (i === 0) return { cls: 'gold',   icon: '🥇' };
+  if (i === 1) return { cls: 'silver', icon: '🥈' };
+  if (i === 2) return { cls: 'bronze', icon: '🥉' };
+  return { cls: '',  icon: '' };
+}
+
+function rankNumHTML(i) {
+  const m = medalsFor(i);
+  return `<span class="rank-num ${m.cls}">${i + 1}</span>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// CSV PARSE
+// ═══════════════════════════════════════════════════════
+function parseCSV(raw) {
+  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+  // Skip header (row 0) and any row where col0 is numeric or empty (totals)
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = splitCSVLine(lines[i]);
+    if (!cols[0] || /^\d/.test(cols[0].trim())) continue;
+    rows.push(cols);
+  }
+  return rows;
+}
+
+function splitCSVLine(line) {
+  const result = [];
+  let cur = '', inQ = false;
+  for (let c of line) {
+    if (c === '"') { inQ = !inQ; continue; }
+    if (c === ',' && !inQ) { result.push(cur.trim()); cur = ''; continue; }
+    cur += c;
+  }
+  result.push(cur.trim());
+  return result;
+}
+
+// ═══════════════════════════════════════════════════════
+// DATA MODEL
+// Map raw CSV columns → structured tech objects.
+// Column order expected (0-indexed):
+//   0: Tech Name
+//   1: Revenue (or Total Revenue)
+//   2: Jobs
+//   3: Avg Ticket
+//   4: Close Rate (%)
+//   5: Memberships Sold
+// If your sheet differs, adjust the indices below.
+// ═══════════════════════════════════════════════════════
+function buildTechs(rows) {
+  return rows.map(c => ({
+    name:        (c[0] || '').trim(),
+    revenue:     parseNum(c[1]),
+    jobs:        parseNum(c[2]),
+    avgTicket:   parseNum(c[3]),
+    closeRate:   parseNum(c[4]),
+    memberships: parseNum(c[5]),
+  })).filter(t => t.name && t.revenue > 0);
+}
+
+// ═══════════════════════════════════════════════════════
+// RENDER FUNCTIONS
+// ═══════════════════════════════════════════════════════
+
+function renderHeader(techs) {
+  const totalJobs = techs.reduce((s, t) => s + t.jobs, 0);
+  document.getElementById('h-techs').textContent = techs.length;
+  document.getElementById('h-jobs').textContent  = totalJobs.toLocaleString();
+}
+
+function renderKPIs(techs) {
+  const totalRev   = techs.reduce((s, t) => s + t.revenue, 0);
+  const totalJobs  = techs.reduce((s, t) => s + t.jobs, 0);
+  const avgTicket  = totalJobs > 0 ? totalRev / totalJobs : 0;
+  const avgClose   = techs.length > 0
+    ? techs.reduce((s, t) => s + t.closeRate, 0) / techs.length
+    : 0;
+
+  // Revenue / goal
+  const pct = clamp((totalRev / MONTHLY_GOAL) * 100, 0, 100);
+  document.getElementById('kpi-revenue').textContent = fmt$(totalRev);
+  document.getElementById('goal-bar').style.width    = pct + '%';
+  document.getElementById('goal-pct').textContent    = fmtPct(pct);
+  document.getElementById('goal-target').textContent = 'Goal: ' + fmt$(MONTHLY_GOAL);
+
+  const pc = pillClass(pct);
+  const pillEl = document.getElementById('goal-pill');
+  pillEl.className  = 'pill ' + pc;
+  pillEl.textContent = pc === 'green' ? 'On Track' : pc === 'yellow' ? 'Watch' : 'Behind';
+
+  document.getElementById('kpi-avg-ticket').textContent = fmt$(avgTicket);
+  document.getElementById('kpi-jobs').textContent       = totalJobs;
+  document.getElementById('kpi-close').textContent      = fmtPct(avgClose);
+}
+
+function renderTable(techs) {
+  const sorted = [...techs].sort((a, b) => b.revenue - a.revenue);
+  const maxRev = sorted[0]?.revenue || 1;
+
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = sorted.map((t, i) => {
+    const m      = medalsFor(i);
+    const barPct = clamp((t.revenue / maxRev) * 100, 0, 100);
+    const cpct   = t.closeRate;
+    const pill   = cpct >= 60 ? 'green' : cpct >= 40 ? 'yellow' : 'red';
+
+    return `<tr>
+      <td>
+        <div class="tech-cell">
+          <span class="rank-num ${m.cls}">${i + 1}</span>
+          ${t.name}
+        </div>
+      </td>
+      <td>${fmt$(t.revenue)}</td>
+      <td class="rev-bar-cell">
+        <div class="mini-bar-row">
+          <div class="mini-bar-fill" style="width:${barPct}%"></div>
+        </div>
+      </td>
+      <td>${t.jobs}</td>
+      <td>${fmt$(t.avgTicket)}</td>
+      <td><span class="pill ${pill}">${fmtPct(t.closeRate)}</span></td>
+      <td>${t.memberships}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderMiniPanels(techs) {
+  // Avg Ticket
+  renderMiniBars('panel-avg-ticket', techs, 'avgTicket',   t => fmt$(t.avgTicket),   '#E8600A', '#FF7722');
+  // Jobs
+  renderMiniBars('panel-jobs',       techs, 'jobs',        t => t.jobs,              '#3498DB', '#5DADE2');
+  // Memberships
+  renderMiniBars('panel-memberships',techs, 'memberships', t => t.memberships,       '#9B59B6', '#BB8FCE');
+}
+
+function renderMiniBars(containerId, techs, key, valFn, c1, c2) {
+  const sorted = [...techs].sort((a, b) => b[key] - a[key]);
+  const max    = sorted[0]?.[key] || 1;
+  const el     = document.getElementById(containerId);
+  el.innerHTML = sorted.map(t => {
+    const pct = clamp((t[key] / max) * 100, 0, 100);
+    const short = t.name.split(' ')[0];
+    return `<div class="mini-bar-item">
+      <span class="mini-bar-label">${short}</span>
+      <div class="mini-bar-track">
+        <div class="mini-bar-fill2" style="width:${pct}%;background:linear-gradient(90deg,${c1},${c2})"></div>
+      </div>
+      <span class="mini-bar-val">${valFn(t)}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderLeaders(techs) {
+  const sorted = [...techs].sort((a, b) => b.revenue - a.revenue).slice(0, 8);
+  const el = document.getElementById('leader-body');
+  el.innerHTML = sorted.map((t, i) => {
+    const m = medalsFor(i);
+    const jobs = t.jobs;
+    return `<div class="leader-item">
+      <span class="medal">${m.icon || (i + 1)}</span>
+      <div class="leader-info">
+        <div class="leader-name">${t.name}</div>
+        <div class="leader-sub">${jobs} jobs · ${fmt$(t.avgTicket)} avg</div>
+      </div>
+      <div class="leader-rev">${fmt$(t.revenue)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderChart(techs) {
+  const sorted = [...techs].sort((a, b) => b.closeRate - a.closeRate).slice(0, 8);
+  const max    = sorted[0]?.closeRate || 1;
+  const el     = document.getElementById('chart-body');
+  el.innerHTML = sorted.map(t => {
+    const pct  = clamp((t.closeRate / max) * 100, 0, 100);
+    const short = t.name.split(' ')[0];
+    return `<div class="chart-bar-item">
+      <span class="chart-bar-label">${short}</span>
+      <div class="chart-bar-track">
+        <div class="chart-bar-fill" style="width:${pct}%"></div>
+      </div>
+      <span class="chart-bar-val">${fmtPct(t.closeRate)}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderFooter() {
+  const now = new Date();
+  const hh  = String(now.getHours()).padStart(2, '0');
+  const mm  = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('footer-time').textContent = `Last updated: ${hh}:${mm}`;
+}
+
+function renderAll(techs) {
+  renderHeader(techs);
+  renderKPIs(techs);
+  renderTable(techs);
+  renderMiniPanels(techs);
+  renderLeaders(techs);
+  renderChart(techs);
+  renderFooter();
+}
+
+// ═══════════════════════════════════════════════════════
+// DATA LOAD
+// ═══════════════════════════════════════════════════════
+async function loadData() {
+  try {
+    const res = await fetch(CSV_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text  = await res.text();
+    const rows  = parseCSV(text);
+    const techs = buildTechs(rows);
+
+    if (techs.length === 0) throw new Error('No technician data found in sheet.');
+
+    renderAll(techs);
+    hideOverlay();
+  } catch (err) {
+    showError(err.message);
+    console.error('Dashboard load error:', err);
+  }
+}
+
+function hideOverlay() {
+  document.getElementById('overlay').classList.add('hidden');
+}
+function showError(msg) {
+  const e = document.getElementById('error-msg');
+  e.style.display = 'block';
+  e.textContent   = '⚠ Error loading data: ' + msg + ' — Check CSV URL or network.';
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+loadData();
+setInterval(loadData, REFRESH_MS);
+</script>
+</body>
+</html>

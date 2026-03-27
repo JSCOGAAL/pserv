@@ -11,19 +11,18 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy:    #0F1F3D;
-    --navy2:   #132847;
-    --navy3:   #1A3460;
-    --orange:  #E8600A;
-    --orange2: #FF7722;
-    --text:    #E8EDF5;
-    --text2:   #A8B8D0;
-    --green:   #2ECC71;
-    --yellow:  #F39C12;
-    --red:     #E74C3C;
-    --border:  rgba(232,224,240,0.08);
-    --card:    rgba(19,40,71,0.85);
-    --card2:   rgba(26,52,96,0.6);
+    --navy:   #0F1F3D;
+    --navy2:  #132847;
+    --navy3:  #1A3460;
+    --orange: #E8600A;
+    --org2:   #FF7722;
+    --text:   #E8EDF5;
+    --text2:  #A8B8D0;
+    --green:  #2ECC71;
+    --yellow: #F39C12;
+    --red:    #E74C3C;
+    --border: rgba(232,237,245,0.07);
+    --card:   rgba(19,40,71,0.9);
   }
 
   html, body {
@@ -35,20 +34,17 @@
     font-weight: 700;
   }
 
-  /* ── GRID SHELL ── */
   #app {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     width: 100vw; height: 100vh;
-    gap: clamp(4px, 0.6vh, 10px);
-    padding: clamp(6px, 0.8vh, 14px) clamp(8px, 1vw, 18px);
+    gap: clamp(4px, 0.55vh, 9px);
+    padding: clamp(5px, 0.7vh, 12px) clamp(7px, 0.9vw, 16px);
   }
 
   /* ── HEADER ── */
   #header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     padding: clamp(4px, 0.5vh, 8px) clamp(8px, 1vw, 16px);
     background: var(--card);
     border-radius: 6px;
@@ -56,504 +52,277 @@
     gap: 1vw;
   }
   .header-left { display: flex; align-items: center; gap: clamp(8px, 1vw, 18px); }
-  .logo-mark {
-    width: clamp(28px, 3.5vw, 52px);
-    height: clamp(28px, 3.5vw, 52px);
-    flex-shrink: 0;
-  }
-  .header-titles { display: flex; flex-direction: column; line-height: 1; }
+  .logo-mark { width: clamp(28px,3.2vw,50px); height: clamp(28px,3.2vw,50px); flex-shrink:0; }
+  .header-titles { display: flex; flex-direction: column; line-height: 1.1; }
   .company-name {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(14px, 2.2vw, 34px);
-    font-weight: 900;
-    color: var(--text);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-size: clamp(13px, 2vw, 32px); font-weight: 900;
+    color: var(--text); letter-spacing: 0.04em; text-transform: uppercase;
   }
   .dept-name {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(9px, 1.3vw, 20px);
-    font-weight: 700;
-    color: var(--orange);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-top: 1px;
+    font-size: clamp(8px, 1.1vw, 17px); font-weight: 700;
+    color: var(--orange); letter-spacing: 0.08em; text-transform: uppercase;
   }
-  .header-right { display: flex; align-items: center; gap: clamp(8px, 1.2vw, 20px); flex-shrink: 0; }
-  .header-stat {
-    display: flex; flex-direction: column; align-items: center;
-    font-family: 'Barlow Condensed', sans-serif;
-  }
-  .header-stat .hval {
-    font-size: clamp(16px, 2.2vw, 36px);
-    font-weight: 900;
-    color: var(--text);
-    line-height: 1;
-  }
-  .header-stat .hlbl {
-    font-size: clamp(7px, 0.9vw, 13px);
-    font-weight: 700;
-    color: var(--text2);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
+  .header-right { display: flex; align-items: center; gap: clamp(8px,1.2vw,20px); flex-shrink:0; }
+  .hstat { display:flex; flex-direction:column; align-items:center; font-family:'Barlow Condensed',sans-serif; }
+  .hstat .hv { font-size: clamp(15px,2vw,34px); font-weight:900; color:var(--text); line-height:1; }
+  .hstat .hl { font-size: clamp(6px,0.8vw,12px); font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.06em; }
   .mtd-badge {
-    background: var(--orange);
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(8px, 1vw, 15px);
-    font-weight: 800;
-    padding: clamp(3px, 0.4vh, 6px) clamp(6px, 0.8vw, 12px);
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    white-space: nowrap;
+    background: var(--orange); color:#fff;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size: clamp(8px,0.9vw,14px); font-weight:800;
+    padding: clamp(3px,.4vh,6px) clamp(6px,.8vw,12px);
+    border-radius:4px; text-transform:uppercase; letter-spacing:.08em; white-space:nowrap;
   }
-  .vsep {
-    width: 1px; height: clamp(22px, 3vh, 42px);
-    background: var(--border);
-  }
+  .vsep { width:1px; height:clamp(20px,3vh,40px); background:var(--border); }
 
   /* ── KPI ROW ── */
   #kpi-row {
     display: grid;
-    grid-template-columns: 2.4fr 1fr 1fr 1fr;
-    gap: clamp(4px, 0.6vw, 10px);
+    grid-template-columns: 2.4fr 1fr 1fr 1fr 1fr;
+    gap: clamp(4px,.55vw,9px);
   }
   .kpi-card {
-    background: var(--card);
-    border-radius: 6px;
+    background: var(--card); border-radius:6px;
     border-top: 4px solid var(--orange);
-    padding: clamp(6px, 0.8vh, 14px) clamp(8px, 1vw, 16px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
+    padding: clamp(5px,.7vh,12px) clamp(7px,.9vw,14px);
+    display: flex; flex-direction:column; justify-content:space-between;
+    position:relative; overflow:hidden;
   }
   .kpi-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(232,96,10,0.04) 0%, transparent 60%);
-    pointer-events: none;
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(135deg,rgba(232,96,10,.05) 0%,transparent 60%);
+    pointer-events:none;
   }
   .kpi-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(8px, 1vw, 14px);
-    font-weight: 700;
-    color: var(--text2);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size: clamp(7px,.85vw,13px); font-weight:700;
+    color:var(--text2); text-transform:uppercase; letter-spacing:.08em;
   }
   .kpi-value {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(20px, 3vw, 52px);
-    font-weight: 900;
-    color: var(--text);
-    line-height: 1;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size: clamp(18px,2.6vw,48px); font-weight:900;
+    color:var(--text); line-height:1;
   }
-  .kpi-sub {
-    font-size: clamp(7px, 0.85vw, 12px);
-    font-weight: 700;
-    color: var(--text2);
-  }
-  /* wide KPI — goal card */
-  .kpi-goal .kpi-value { font-size: clamp(22px, 3.5vw, 60px); color: var(--orange); }
+  .kpi-sub { font-size:clamp(6px,.78vw,11px); font-weight:700; color:var(--text2); }
+
+  .kpi-goal .kpi-value { font-size:clamp(20px,3.2vw,56px); color:var(--orange); }
   .goal-bar-wrap {
-    background: rgba(255,255,255,0.08);
-    border-radius: 3px;
-    height: clamp(6px, 1vh, 14px);
-    overflow: hidden;
-    margin: clamp(3px, 0.4vh, 6px) 0;
+    background:rgba(255,255,255,.08); border-radius:3px;
+    height:clamp(5px,.9vh,13px); overflow:hidden;
+    margin: clamp(2px,.35vh,5px) 0;
   }
   .goal-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--orange), var(--orange2));
-    transition: width 0.8s ease;
-    position: relative;
+    height:100%; border-radius:3px;
+    background:linear-gradient(90deg,var(--orange),var(--org2));
+    transition:width .8s ease; position:relative;
   }
   .goal-bar-fill::after {
-    content: '';
-    position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 0 3px 3px 0;
+    content:''; position:absolute; right:0; top:0; bottom:0; width:3px;
+    background:rgba(255,255,255,.45); border-radius:0 3px 3px 0;
   }
-  .goal-row {
-    display: flex; justify-content: space-between; align-items: flex-end;
-  }
-  .goal-pct {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(10px, 1.3vw, 20px);
-    font-weight: 900;
-    color: var(--orange);
-  }
-  .goal-target {
-    font-size: clamp(7px, 0.85vw, 12px);
-    color: var(--text2);
-    font-weight: 700;
-  }
+  .goal-row { display:flex; justify-content:space-between; align-items:flex-end; }
+  .goal-pct { font-family:'Barlow Condensed',sans-serif; font-size:clamp(9px,1.2vw,18px); font-weight:900; color:var(--orange); }
+  .goal-target { font-size:clamp(6px,.78vw,11px); color:var(--text2); font-weight:700; }
+
   .pill {
-    display: inline-flex; align-items: center;
-    padding: 1px clamp(4px,0.5vw,8px);
-    border-radius: 20px;
-    font-size: clamp(7px, 0.8vw, 11px);
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    display:inline-flex; align-items:center;
+    padding:1px clamp(4px,.45vw,7px); border-radius:20px;
+    font-size:clamp(6px,.72vw,10px); font-weight:800;
+    letter-spacing:.04em; text-transform:uppercase;
   }
-  .pill.green  { background: rgba(46,204,113,0.18); color: var(--green); }
-  .pill.yellow { background: rgba(243,156,18,0.18); color: var(--yellow); }
-  .pill.red    { background: rgba(231,76,60,0.18);  color: var(--red); }
+  .pill.green  { background:rgba(46,204,113,.18); color:var(--green); }
+  .pill.yellow { background:rgba(243,156,18,.18);  color:var(--yellow); }
+  .pill.red    { background:rgba(231,76,60,.18);   color:var(--red); }
 
   /* ── MAIN BODY ── */
   #main-body {
-    display: grid;
-    grid-template-columns: 1fr clamp(200px, 22vw, 360px);
-    gap: clamp(4px, 0.6vw, 10px);
-    min-height: 0;
+    display:grid;
+    grid-template-columns: 1fr clamp(190px,21vw,340px);
+    gap: clamp(4px,.55vw,9px);
+    min-height:0;
   }
   #left-col {
-    display: grid;
+    display:grid;
     grid-template-rows: 1fr auto;
-    gap: clamp(4px, 0.6vw, 10px);
-    min-height: 0;
+    gap: clamp(4px,.55vw,9px);
+    min-height:0;
   }
   .panel {
-    background: var(--card);
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    background:var(--card); border-radius:6px;
+    overflow:hidden; display:flex; flex-direction:column;
   }
   .panel-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: clamp(4px, 0.5vh, 8px) clamp(8px, 1vw, 14px);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: clamp(3px,.45vh,7px) clamp(7px,.9vw,13px);
+    border-bottom:1px solid var(--border); flex-shrink:0;
   }
   .panel-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(9px, 1.1vw, 16px);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(8px,1vw,15px); font-weight:800;
+    text-transform:uppercase; letter-spacing:.08em; color:var(--text);
   }
   .sorted-badge {
-    background: rgba(232,96,10,0.15);
-    color: var(--orange);
-    font-size: clamp(7px, 0.75vw, 11px);
-    font-weight: 800;
-    padding: 2px clamp(4px, 0.5vw, 8px);
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    border: 1px solid rgba(232,96,10,0.3);
+    background:rgba(232,96,10,.15); color:var(--orange);
+    font-size:clamp(6px,.7vw,10px); font-weight:800;
+    padding:2px clamp(3px,.45vw,7px); border-radius:4px;
+    text-transform:uppercase; letter-spacing:.06em;
+    border:1px solid rgba(232,96,10,.3);
   }
 
-  /* ── DATA TABLE ── */
-  #table-panel { min-height: 0; }
-  .table-scroll { flex: 1; overflow: hidden; min-height: 0; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
+  /* ── TABLE ── */
+  #table-panel { min-height:0; }
+  .table-scroll { flex:1; overflow:hidden; min-height:0; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
   thead th {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(7px, 0.85vw, 12px);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text2);
-    padding: clamp(3px, 0.4vh, 6px) clamp(6px, 0.7vw, 10px);
-    text-align: right;
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 0;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(6px,.78vw,11px); font-weight:800;
+    text-transform:uppercase; letter-spacing:.07em; color:var(--text2);
+    padding: clamp(2px,.35vh,5px) clamp(5px,.6vw,9px);
+    text-align:right; background:rgba(255,255,255,.03);
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:1;
   }
-  thead th:first-child { text-align: left; }
-  tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-  tbody tr:hover { background: rgba(255,255,255,0.04); }
-  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
-  tbody tr:nth-child(even):hover { background: rgba(255,255,255,0.05); }
+  thead th:first-child { text-align:left; }
+  tbody tr { border-bottom:1px solid var(--border); }
+  tbody tr:nth-child(even) { background:rgba(255,255,255,.02); }
+  tbody tr:hover { background:rgba(255,255,255,.04); }
   tbody td {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(9px, 1.1vw, 16px);
-    font-weight: 700;
-    padding: clamp(3px, 0.35vh, 5px) clamp(6px, 0.7vw, 10px);
-    text-align: right;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(8px,1vw,15px); font-weight:700;
+    padding: clamp(2px,.3vh,4px) clamp(5px,.6vw,9px);
+    text-align:right; color:var(--text);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  tbody td:first-child { text-align: left; font-weight: 800; }
+  tbody td:first-child { text-align:left; font-weight:800; }
   .rank-num {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: clamp(14px, 1.5vw, 22px); height: clamp(14px, 1.5vw, 22px);
-    border-radius: 50%;
-    font-size: clamp(7px, 0.85vw, 12px);
-    font-weight: 900;
-    background: rgba(255,255,255,0.08);
-    color: var(--text2);
-    margin-right: 4px;
-    flex-shrink: 0;
+    display:inline-flex; align-items:center; justify-content:center;
+    width:clamp(13px,1.4vw,20px); height:clamp(13px,1.4vw,20px);
+    border-radius:50%; font-size:clamp(6px,.78vw,11px); font-weight:900;
+    background:rgba(255,255,255,.08); color:var(--text2); margin-right:3px; flex-shrink:0;
   }
-  .rank-num.gold   { background: rgba(255,215,0,0.2);  color: #FFD700; }
-  .rank-num.silver { background: rgba(192,192,192,0.2);color: #C0C0C0; }
-  .rank-num.bronze { background: rgba(205,127,50,0.2); color: #CD7F32; }
-  .tech-cell { display: flex; align-items: center; }
-  .rev-bar-cell { padding: clamp(3px, 0.35vh, 5px) clamp(6px, 0.7vw, 10px) !important; }
-  .mini-bar-row {
-    height: clamp(4px, 0.6vh, 8px);
-    background: rgba(255,255,255,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .mini-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--orange), var(--orange2));
-  }
+  .rank-num.gold   { background:rgba(255,215,0,.2);  color:#FFD700; }
+  .rank-num.silver { background:rgba(192,192,192,.2);color:#C0C0C0; }
+  .rank-num.bronze { background:rgba(205,127,50,.2); color:#CD7F32; }
+  .tech-cell { display:flex; align-items:center; }
+  .rev-bar-cell { padding:clamp(2px,.3vh,4px) clamp(5px,.6vw,9px) !important; }
+  .mini-bar-row { height:clamp(4px,.55vh,7px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+  .mini-bar-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--orange),var(--org2)); }
 
-  /* ── BOTTOM PANELS ── */
+  /* ── BOTTOM 3 PANELS ── */
   #bottom-panels {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: clamp(4px, 0.6vw, 10px);
-    height: clamp(100px, 14vh, 200px);
-    flex-shrink: 0;
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    gap:clamp(4px,.55vw,9px);
+    height:clamp(90px,13vh,185px); flex-shrink:0;
   }
-  .mini-panel {
-    background: var(--card);
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .mini-panel .panel-header { padding: clamp(3px,0.4vh,6px) clamp(6px,0.8vw,12px); }
+  .mini-panel { background:var(--card); border-radius:6px; overflow:hidden; display:flex; flex-direction:column; }
+  .mini-panel .panel-header { padding:clamp(2px,.35vh,5px) clamp(5px,.7vw,11px); }
   .mini-bars-body {
-    flex: 1;
-    padding: clamp(2px,0.3vh,5px) clamp(6px,0.8vw,12px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 0;
+    flex:1; padding:clamp(2px,.28vh,4px) clamp(5px,.7vw,11px);
+    display:flex; flex-direction:column; justify-content:space-evenly; min-height:0;
   }
   .mini-bar-item {
-    display: grid;
-    grid-template-columns: clamp(60px,8vw,110px) 1fr clamp(30px,4vw,60px);
-    align-items: center;
-    gap: clamp(3px, 0.4vw, 7px);
+    display:grid;
+    grid-template-columns:clamp(55px,7.5vw,105px) 1fr clamp(28px,3.8vw,58px);
+    align-items:center; gap:clamp(3px,.38vw,6px);
   }
   .mini-bar-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(7px, 0.8vw, 12px);
-    font-weight: 800;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(6px,.78vw,11px); font-weight:800; color:var(--text);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  .mini-bar-track {
-    height: clamp(5px, 0.7vh, 10px);
-    background: rgba(255,255,255,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .mini-bar-fill2 {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.6s ease;
-  }
+  .mini-bar-track { height:clamp(4px,.6vh,9px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+  .mini-bar-fill2 { height:100%; border-radius:2px; transition:width .6s ease; }
   .mini-bar-val {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(7px, 0.85vw, 12px);
-    font-weight: 900;
-    text-align: right;
-    color: var(--text);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(6px,.8vw,11px); font-weight:900; text-align:right; color:var(--text);
   }
 
   /* ── RIGHT SIDEBAR ── */
-  #right-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(4px, 0.6vw, 10px);
-    min-height: 0;
-  }
-  .sidebar-panel {
-    background: var(--card);
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-  }
+  #right-sidebar { display:flex; flex-direction:column; gap:clamp(4px,.55vw,9px); min-height:0; }
+  .sidebar-panel { background:var(--card); border-radius:6px; overflow:hidden; display:flex; flex-direction:column; flex:1; min-height:0; }
 
-  /* leaderboard */
   .leader-body {
-    flex: 1;
-    padding: clamp(2px,0.3vh,5px) clamp(6px,0.8vw,12px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 0;
+    flex:1; padding:clamp(2px,.28vh,4px) clamp(5px,.7vw,11px);
+    display:flex; flex-direction:column; justify-content:space-evenly; min-height:0;
   }
   .leader-item {
-    display: flex; align-items: center;
-    gap: clamp(4px, 0.5vw, 8px);
-    padding: clamp(2px, 0.25vh, 4px) 0;
-    border-bottom: 1px solid var(--border);
+    display:flex; align-items:center; gap:clamp(3px,.45vw,7px);
+    padding:clamp(2px,.22vh,3px) 0; border-bottom:1px solid var(--border);
   }
-  .leader-item:last-child { border-bottom: none; }
-  .medal {
-    font-size: clamp(10px, 1.3vw, 20px);
-    flex-shrink: 0;
-    line-height: 1;
-  }
-  .leader-info { flex: 1; min-width: 0; }
+  .leader-item:last-child { border-bottom:none; }
+  .medal { font-size:clamp(9px,1.2vw,18px); flex-shrink:0; line-height:1; }
+  .leader-info { flex:1; min-width:0; }
   .leader-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(9px, 1.1vw, 17px);
-    font-weight: 800;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(8px,1vw,16px); font-weight:800; color:var(--text);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1;
   }
-  .leader-sub {
-    font-size: clamp(6px, 0.75vw, 10px);
-    color: var(--text2);
-    font-weight: 700;
-  }
+  .leader-sub { font-size:clamp(5px,.68vw,9px); color:var(--text2); font-weight:700; }
   .leader-rev {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(10px, 1.3vw, 20px);
-    font-weight: 900;
-    color: var(--orange);
-    flex-shrink: 0;
-    text-align: right;
-    line-height: 1;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(9px,1.1vw,18px); font-weight:900; color:var(--orange);
+    flex-shrink:0; text-align:right; line-height:1;
   }
 
-  /* sidebar chart */
   .chart-body {
-    flex: 1;
-    padding: clamp(2px,0.3vh,5px) clamp(6px,0.8vw,12px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 0;
+    flex:1; padding:clamp(2px,.28vh,4px) clamp(5px,.7vw,11px);
+    display:flex; flex-direction:column; justify-content:space-evenly; min-height:0;
   }
   .chart-bar-item {
-    display: grid;
-    grid-template-columns: clamp(55px,7vw,100px) 1fr clamp(28px,3.5vw,55px);
-    align-items: center;
-    gap: clamp(3px, 0.4vw, 6px);
+    display:grid;
+    grid-template-columns:clamp(50px,6.5vw,95px) 1fr clamp(26px,3.2vw,50px);
+    align-items:center; gap:clamp(3px,.38vw,6px);
   }
   .chart-bar-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(7px, 0.85vw, 13px);
-    font-weight: 800;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(6px,.8vw,12px); font-weight:800; color:var(--text);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  .chart-bar-track {
-    height: clamp(6px, 0.8vh, 12px);
-    background: rgba(255,255,255,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .chart-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(90deg, #2ECC71, #27AE60);
-    transition: width 0.6s ease;
-  }
+  .chart-bar-track { height:clamp(5px,.72vh,11px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+  .chart-bar-fill { height:100%; border-radius:2px; transition:width .6s ease; }
   .chart-bar-val {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(7px, 0.9vw, 13px);
-    font-weight: 900;
-    text-align: right;
-    color: var(--green);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(6px,.8vw,12px); font-weight:900; text-align:right;
   }
 
   /* ── FOOTER ── */
   #footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    padding: clamp(3px, 0.4vh, 6px) clamp(8px, 1vw, 16px);
-    background: var(--card);
-    border-radius: 6px;
-    border-top: 1px solid var(--border);
+    display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center;
+    padding: clamp(2px,.35vh,5px) clamp(7px,.9vw,14px);
+    background:var(--card); border-radius:6px; border-top:1px solid var(--border);
   }
-  .footer-left {
-    font-size: clamp(7px, 0.8vw, 11px);
-    font-weight: 700;
-    color: var(--text2);
-  }
-  .footer-left span { color: var(--orange); }
+  .footer-left { font-size:clamp(6px,.75vw,10px); font-weight:700; color:var(--text2); }
+  .footer-left span { color:var(--orange); }
   .footer-center {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(7px, 0.9vw, 13px);
-    font-weight: 800;
-    color: var(--text2);
-    text-align: center;
-    letter-spacing: 0.04em;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(6px,.82vw,12px); font-weight:800; color:var(--text2);
+    text-align:center; letter-spacing:.04em;
   }
-  .footer-right {
-    font-size: clamp(7px, 0.8vw, 11px);
-    font-weight: 700;
-    color: var(--text2);
-    text-align: right;
-    font-style: italic;
-  }
+  .footer-right { font-size:clamp(6px,.75vw,10px); font-weight:700; color:var(--text2); text-align:right; font-style:italic; }
 
   /* ── OVERLAY ── */
   #overlay {
-    position: fixed; inset: 0;
-    background: var(--navy);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    z-index: 1000;
-    gap: clamp(8px, 2vh, 24px);
-    transition: opacity 0.4s;
+    position:fixed; inset:0; background:var(--navy);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    z-index:1000; gap:clamp(8px,2vh,22px); transition:opacity .4s;
   }
-  #overlay.hidden { opacity: 0; pointer-events: none; }
+  #overlay.hidden { opacity:0; pointer-events:none; }
   .spinner {
-    width: clamp(28px, 4vw, 52px);
-    height: clamp(28px, 4vw, 52px);
-    border: 3px solid rgba(232,96,10,0.2);
-    border-top-color: var(--orange);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    width:clamp(26px,3.8vw,50px); height:clamp(26px,3.8vw,50px);
+    border:3px solid rgba(232,96,10,.2); border-top-color:var(--orange);
+    border-radius:50%; animation:spin .8s linear infinite;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spin { to { transform:rotate(360deg); } }
   .overlay-text {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(14px, 2vw, 28px);
-    font-weight: 800;
-    color: var(--text2);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(13px,1.8vw,26px); font-weight:800;
+    color:var(--text2); letter-spacing:.1em; text-transform:uppercase;
   }
   #error-msg {
-    color: var(--red);
-    font-size: clamp(10px, 1.2vw, 16px);
-    font-weight: 700;
-    display: none;
-    text-align: center;
-    max-width: 60vw;
+    color:var(--red); font-size:clamp(9px,1.1vw,15px); font-weight:700;
+    display:none; text-align:center; max-width:60vw; line-height:1.5;
   }
 </style>
 </head>
@@ -571,11 +340,6 @@
   <header id="header">
     <div class="header-left">
       <svg class="logo-mark" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="hex-clip">
-            <polygon points="26,2 48,14 48,38 26,50 4,38 4,14"/>
-          </clipPath>
-        </defs>
         <polygon points="26,2 48,14 48,38 26,50 4,38 4,14" fill="#E8600A"/>
         <polygon points="26,8 44,18 44,36 26,46 8,36 8,18" fill="#0F1F3D"/>
         <text x="26" y="34" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="900" font-size="22" fill="#E8600A">JS</text>
@@ -586,14 +350,19 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-stat">
-        <span class="hval" id="h-techs">—</span>
-        <span class="hlbl">Technicians</span>
+      <div class="hstat">
+        <span class="hv" id="h-techs">—</span>
+        <span class="hl">Technicians</span>
       </div>
       <div class="vsep"></div>
-      <div class="header-stat">
-        <span class="hval" id="h-jobs">—</span>
-        <span class="hlbl">Total Jobs</span>
+      <div class="hstat">
+        <span class="hv" id="h-calls">—</span>
+        <span class="hl">Demand Calls</span>
+      </div>
+      <div class="vsep"></div>
+      <div class="hstat">
+        <span class="hv" id="h-spp">—</span>
+        <span class="hl">SPP Calls</span>
       </div>
       <div class="vsep"></div>
       <div class="mtd-badge">Month to Date</div>
@@ -602,7 +371,6 @@
 
   <!-- KPI ROW -->
   <div id="kpi-row">
-    <!-- Goal Card (wide) -->
     <div class="kpi-card kpi-goal">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;">
         <div class="kpi-label">Revenue vs. Monthly Goal</div>
@@ -619,30 +387,32 @@
         </div>
       </div>
     </div>
-    <!-- KPI 2 -->
     <div class="kpi-card">
-      <div class="kpi-label">Avg Ticket</div>
-      <div class="kpi-value" id="kpi-avg-ticket">$0</div>
-      <div class="kpi-sub" id="kpi-avg-sub">Per completed job</div>
+      <div class="kpi-label">Avg Sale</div>
+      <div class="kpi-value" id="kpi-avg-sale">$0</div>
+      <div class="kpi-sub">Avg across techs</div>
     </div>
-    <!-- KPI 3 -->
     <div class="kpi-card">
-      <div class="kpi-label">Total Jobs</div>
-      <div class="kpi-value" id="kpi-jobs">0</div>
-      <div class="kpi-sub" id="kpi-jobs-sub">Across all techs</div>
+      <div class="kpi-label">Conversion Rate</div>
+      <div class="kpi-value" id="kpi-conversion">0%</div>
+      <div class="kpi-sub">Avg across techs</div>
     </div>
-    <!-- KPI 4 -->
     <div class="kpi-card">
-      <div class="kpi-label">Avg Close Rate</div>
-      <div class="kpi-value" id="kpi-close">0%</div>
-      <div class="kpi-sub" id="kpi-close-sub">Sold / Presented</div>
+      <div class="kpi-label">Rev / Billable Hr</div>
+      <div class="kpi-value" id="kpi-rpbh">$0</div>
+      <div class="kpi-sub">Avg across techs</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Options Per Opp</div>
+      <div class="kpi-value" id="kpi-options">—</div>
+      <div class="kpi-sub">From estimates sheet</div>
     </div>
   </div>
 
   <!-- MAIN BODY -->
   <div id="main-body">
     <div id="left-col">
-      <!-- TABLE PANEL -->
+
       <div class="panel" id="table-panel">
         <div class="panel-header">
           <span class="panel-title">Technician Performance</span>
@@ -652,45 +422,40 @@
           <table>
             <thead>
               <tr>
-                <th style="width:22%;text-align:left;">Technician</th>
-                <th style="width:13%;">Revenue</th>
-                <th style="width:20%;">Revenue Bar</th>
-                <th style="width:10%;">Jobs</th>
-                <th style="width:12%;">Avg Ticket</th>
-                <th style="width:11%;">Close %</th>
-                <th style="width:12%;">Memberships</th>
+                <th style="width:20%;text-align:left;">Technician</th>
+                <th style="width:11%;">Revenue</th>
+                <th style="width:15%;">Bar</th>
+                <th style="width:8%;">Calls</th>
+                <th style="width:10%;">Avg Sale</th>
+                <th style="width:9%;">Conv %</th>
+                <th style="width:9%;">Sold Hrs</th>
+                <th style="width:9%;">Efficiency</th>
+                <th style="width:9%;">Opts/Opp</th>
               </tr>
             </thead>
             <tbody id="table-body"></tbody>
           </table>
         </div>
       </div>
-      <!-- BOTTOM 3 MINI PANELS -->
+
       <div id="bottom-panels">
         <div class="mini-panel">
-          <div class="panel-header">
-            <span class="panel-title">Avg Ticket</span>
-          </div>
-          <div class="mini-bars-body" id="panel-avg-ticket"></div>
+          <div class="panel-header"><span class="panel-title">Rev / Billable Hour</span></div>
+          <div class="mini-bars-body" id="panel-rpbh"></div>
         </div>
         <div class="mini-panel">
-          <div class="panel-header">
-            <span class="panel-title">Jobs Completed</span>
-          </div>
-          <div class="mini-bars-body" id="panel-jobs"></div>
+          <div class="panel-header"><span class="panel-title">Sold Hour Efficiency</span></div>
+          <div class="mini-bars-body" id="panel-efficiency"></div>
         </div>
         <div class="mini-panel">
-          <div class="panel-header">
-            <span class="panel-title">Memberships Sold</span>
-          </div>
-          <div class="mini-bars-body" id="panel-memberships"></div>
+          <div class="panel-header"><span class="panel-title">SPP Calls</span></div>
+          <div class="mini-bars-body" id="panel-spp"></div>
         </div>
       </div>
+
     </div>
 
-    <!-- RIGHT SIDEBAR -->
     <div id="right-sidebar">
-      <!-- LEADERBOARD -->
       <div class="sidebar-panel">
         <div class="panel-header">
           <span class="panel-title">Revenue Leaders</span>
@@ -698,17 +463,15 @@
         </div>
         <div class="leader-body" id="leader-body"></div>
       </div>
-      <!-- SIDEBAR CHART — Close Rate -->
       <div class="sidebar-panel">
         <div class="panel-header">
-          <span class="panel-title">Close Rate Ranking</span>
+          <span class="panel-title">Conversion Rate Ranking</span>
         </div>
         <div class="chart-body" id="chart-body"></div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-left"><span>Jackson Services</span> · Plumbing Service · East Alabama &amp; West Georgia</div>
     <div class="footer-center" id="footer-time">Last updated: —</div>
@@ -718,31 +481,32 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // CONFIGURATION
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 const MONTHLY_GOAL = 210000;
 
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS86maxFBdZphtkCEOMqfUyPuxe-Hm7YxR9dX9lCtlctoaSjFD3_zogc1no5hZ1_r73fkrC0VAwHVU/pub?output=csv';
+const CSV_SHEET1 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS86maxFBdZphtkCEOMqfUyPuxe-Hm7YxR9dX9lCtlctoaSjFD3_zogc1no5hZ1_r73fkrC0VAwHVU/pub?gid=0&single=true&output=csv';
 
-const REFRESH_MS = 60 * 60 * 1000; // 60 minutes
+const CSV_SHEET2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQS86maxFBdZphtkCEOMqfUyPuxe-Hm7YxR9dX9lCtlctoaSjFD3_zogc1no5hZ1_r73fkrC0VAwHVU/pub?gid=1725910918&single=true&output=csv';
 
-// ═══════════════════════════════════════════════════════
+const REFRESH_MS = 60 * 60 * 1000;
+
+// ═══════════════════════════════════════════════════════════════
 // HELPERS
-// ═══════════════════════════════════════════════════════
-function fmt$(n) {
-  if (!isFinite(n)) return '$0';
-  return '$' + Math.round(n).toLocaleString();
-}
-function fmtPct(n) {
-  if (!isFinite(n)) return '0%';
-  return Math.round(n) + '%';
-}
-function clamp(val, lo, hi) { return Math.min(hi, Math.max(lo, val)); }
+// ═══════════════════════════════════════════════════════════════
+const fmt$   = n => isFinite(n) ? '$' + Math.round(n).toLocaleString() : '$0';
+const fmtPct = n => isFinite(n) ? Math.round(n) + '%' : '0%';
+const fmtDec = (n, d=1) => isFinite(n) ? Number(n).toFixed(d) : '—';
+const clampN = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 function parseNum(s) {
-  if (!s) return 0;
-  return parseFloat(String(s).replace(/[$,%]/g, '').trim()) || 0;
+  if (s == null) return 0;
+  return parseFloat(String(s).replace(/[$,%\s]/g, '')) || 0;
+}
+
+function normName(s) {
+  return String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
 function pillClass(pct) {
@@ -751,150 +515,177 @@ function pillClass(pct) {
   return 'red';
 }
 
-function medalsFor(i) {
-  if (i === 0) return { cls: 'gold',   icon: '🥇' };
-  if (i === 1) return { cls: 'silver', icon: '🥈' };
-  if (i === 2) return { cls: 'bronze', icon: '🥉' };
-  return { cls: '',  icon: '' };
+function medalFor(i) {
+  return [{ cls:'gold', icon:'🥇' }, { cls:'silver', icon:'🥈' }, { cls:'bronze', icon:'🥉' }][i]
+      || { cls:'', icon:'' };
 }
 
-function rankNumHTML(i) {
-  const m = medalsFor(i);
-  return `<span class="rank-num ${m.cls}">${i + 1}</span>`;
-}
-
-// ═══════════════════════════════════════════════════════
-// CSV PARSE
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// CSV PARSER
+// ═══════════════════════════════════════════════════════════════
 function parseCSV(raw) {
-  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
-  // Skip header (row 0) and any row where col0 is numeric or empty (totals)
+  const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
   const rows = [];
   for (let i = 1; i < lines.length; i++) {
-    const cols = splitCSVLine(lines[i]);
-    if (!cols[0] || /^\d/.test(cols[0].trim())) continue;
+    const cols = splitLine(lines[i]);
+    const c0   = (cols[0] || '').trim();
+    // Skip blank col0 or rows where col0 starts with a digit (totals/summary rows)
+    if (!c0 || /^\d/.test(c0)) continue;
     rows.push(cols);
   }
   return rows;
 }
 
-function splitCSVLine(line) {
-  const result = [];
-  let cur = '', inQ = false;
-  for (let c of line) {
-    if (c === '"') { inQ = !inQ; continue; }
-    if (c === ',' && !inQ) { result.push(cur.trim()); cur = ''; continue; }
-    cur += c;
+function splitLine(line) {
+  const out = []; let cur = '', inQ = false;
+  for (const ch of line) {
+    if (ch === '"') { inQ = !inQ; continue; }
+    if (ch === ',' && !inQ) { out.push(cur.trim()); cur = ''; continue; }
+    cur += ch;
   }
-  result.push(cur.trim());
-  return result;
+  out.push(cur.trim());
+  return out;
 }
 
-// ═══════════════════════════════════════════════════════
-// DATA MODEL
-// Map raw CSV columns → structured tech objects.
-// Column order expected (0-indexed):
-//   0: Tech Name
-//   1: Revenue (or Total Revenue)
-//   2: Jobs
-//   3: Avg Ticket
-//   4: Close Rate (%)
-//   5: Memberships Sold
-// If your sheet differs, adjust the indices below.
-// ═══════════════════════════════════════════════════════
-function buildTechs(rows) {
+// ═══════════════════════════════════════════════════════════════
+// DATA MODELS
+//
+// Sheet1 columns (0-indexed):
+//   A=0  Technician
+//   B=1  Hours Worked
+//   C=2  Sold Hours
+//   D=3  Tech Sold Hour Efficiency       (e.g. 85 = 85%)
+//   E=4  Revenue Per Billable Hour
+//   F=5  Total Revenue $
+//   G=6  Total Demand Calls
+//   H=7  Conversion Rate %               (e.g. 72 = 72%)
+//   I=8  Average Sale
+//   J=9  # Flat Rate Tasks Per Call
+//   K=10 Total SPP Calls
+//   L=11 Total Call Backs Run
+//   M=12 Technician Business Unit
+//   N=13 Active Technician
+//   O=14 Sold Hours To On-Job Time
+//
+// Sheet2 (Plumbing Options Estimates):
+//   A=0  Technician name  (join key)
+//   R=17 Options Per Opp
+// ═══════════════════════════════════════════════════════════════
+function buildSheet1(rows) {
   return rows.map(c => ({
-    name:        (c[0] || '').trim(),
-    revenue:     parseNum(c[1]),
-    jobs:        parseNum(c[2]),
-    avgTicket:   parseNum(c[3]),
-    closeRate:   parseNum(c[4]),
-    memberships: parseNum(c[5]),
+    name:           (c[0]  || '').trim(),
+    hoursWorked:    parseNum(c[1]),
+    soldHours:      parseNum(c[2]),
+    efficiency:     parseNum(c[3]),
+    revPerBillHr:   parseNum(c[4]),
+    revenue:        parseNum(c[5]),
+    demandCalls:    parseNum(c[6]),
+    conversionRate: parseNum(c[7]),
+    avgSale:        parseNum(c[8]),
+    flatRateTasks:  parseNum(c[9]),
+    sppCalls:       parseNum(c[10]),
+    callBacks:      parseNum(c[11]),
+    businessUnit:   (c[12] || '').trim(),
+    active:         (c[13] || '').trim(),
+    soldHrsToOnJob: parseNum(c[14]),
   })).filter(t => t.name && t.revenue > 0);
 }
 
-// ═══════════════════════════════════════════════════════
-// RENDER FUNCTIONS
-// ═══════════════════════════════════════════════════════
+function buildSheet2Map(rows) {
+  // Map normalised tech name → Options Per Opp (column R = index 17)
+  const map = {};
+  for (const c of rows) {
+    const name = normName(c[0]);
+    if (!name) continue;
+    map[name] = parseNum(c[17]);
+  }
+  return map;
+}
 
+function joinData(techs, optionsMap) {
+  return techs.map(t => ({
+    ...t,
+    optionsPerOpp: optionsMap[normName(t.name)] ?? null,
+  }));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER FUNCTIONS
+// ═══════════════════════════════════════════════════════════════
 function renderHeader(techs) {
-  const totalJobs = techs.reduce((s, t) => s + t.jobs, 0);
+  const totalCalls = techs.reduce((s, t) => s + t.demandCalls, 0);
+  const totalSPP   = techs.reduce((s, t) => s + t.sppCalls, 0);
   document.getElementById('h-techs').textContent = techs.length;
-  document.getElementById('h-jobs').textContent  = totalJobs.toLocaleString();
+  document.getElementById('h-calls').textContent = totalCalls.toLocaleString();
+  document.getElementById('h-spp').textContent   = totalSPP.toLocaleString();
 }
 
 function renderKPIs(techs) {
-  const totalRev   = techs.reduce((s, t) => s + t.revenue, 0);
-  const totalJobs  = techs.reduce((s, t) => s + t.jobs, 0);
-  const avgTicket  = totalJobs > 0 ? totalRev / totalJobs : 0;
-  const avgClose   = techs.length > 0
-    ? techs.reduce((s, t) => s + t.closeRate, 0) / techs.length
-    : 0;
+  const totalRev  = techs.reduce((s, t) => s + t.revenue, 0);
+  const avgSale   = techs.reduce((s, t) => s + t.avgSale, 0)         / techs.length;
+  const avgConv   = techs.reduce((s, t) => s + t.conversionRate, 0)  / techs.length;
+  const avgRPBH   = techs.reduce((s, t) => s + t.revPerBillHr, 0)    / techs.length;
 
-  // Revenue / goal
-  const pct = clamp((totalRev / MONTHLY_GOAL) * 100, 0, 100);
+  // Options Per Opp: only average techs that have a value from Sheet2
+  const withOpts  = techs.filter(t => t.optionsPerOpp !== null && t.optionsPerOpp > 0);
+  const avgOpts   = withOpts.length
+    ? withOpts.reduce((s, t) => s + t.optionsPerOpp, 0) / withOpts.length
+    : null;
+
+  const pct = clampN((totalRev / MONTHLY_GOAL) * 100, 0, 100);
+
   document.getElementById('kpi-revenue').textContent = fmt$(totalRev);
   document.getElementById('goal-bar').style.width    = pct + '%';
   document.getElementById('goal-pct').textContent    = fmtPct(pct);
   document.getElementById('goal-target').textContent = 'Goal: ' + fmt$(MONTHLY_GOAL);
 
-  const pc = pillClass(pct);
-  const pillEl = document.getElementById('goal-pill');
-  pillEl.className  = 'pill ' + pc;
-  pillEl.textContent = pc === 'green' ? 'On Track' : pc === 'yellow' ? 'Watch' : 'Behind';
+  const pc   = pillClass(pct);
+  const pill = document.getElementById('goal-pill');
+  pill.className   = 'pill ' + pc;
+  pill.textContent = pc === 'green' ? 'On Track' : pc === 'yellow' ? 'Watch' : 'Behind';
 
-  document.getElementById('kpi-avg-ticket').textContent = fmt$(avgTicket);
-  document.getElementById('kpi-jobs').textContent       = totalJobs;
-  document.getElementById('kpi-close').textContent      = fmtPct(avgClose);
+  document.getElementById('kpi-avg-sale').textContent  = fmt$(avgSale);
+  document.getElementById('kpi-conversion').textContent = fmtPct(avgConv);
+  document.getElementById('kpi-rpbh').textContent       = fmt$(avgRPBH);
+  document.getElementById('kpi-options').textContent    = avgOpts !== null ? fmtDec(avgOpts, 1) : '—';
 }
 
 function renderTable(techs) {
   const sorted = [...techs].sort((a, b) => b.revenue - a.revenue);
   const maxRev = sorted[0]?.revenue || 1;
 
-  const tbody = document.getElementById('table-body');
-  tbody.innerHTML = sorted.map((t, i) => {
-    const m      = medalsFor(i);
-    const barPct = clamp((t.revenue / maxRev) * 100, 0, 100);
-    const cpct   = t.closeRate;
-    const pill   = cpct >= 60 ? 'green' : cpct >= 40 ? 'yellow' : 'red';
+  document.getElementById('table-body').innerHTML = sorted.map((t, i) => {
+    const m      = medalFor(i);
+    const barPct = clampN((t.revenue / maxRev) * 100, 0, 100);
+    const cPill  = t.conversionRate >= 60 ? 'green' : t.conversionRate >= 40 ? 'yellow' : 'red';
+    const eff    = t.efficiency > 0 ? fmtPct(t.efficiency) : '—';
+    const opts   = t.optionsPerOpp !== null && t.optionsPerOpp > 0 ? fmtDec(t.optionsPerOpp, 1) : '—';
 
     return `<tr>
-      <td>
-        <div class="tech-cell">
-          <span class="rank-num ${m.cls}">${i + 1}</span>
-          ${t.name}
-        </div>
-      </td>
+      <td><div class="tech-cell"><span class="rank-num ${m.cls}">${i+1}</span>${t.name}</div></td>
       <td>${fmt$(t.revenue)}</td>
-      <td class="rev-bar-cell">
-        <div class="mini-bar-row">
-          <div class="mini-bar-fill" style="width:${barPct}%"></div>
-        </div>
-      </td>
-      <td>${t.jobs}</td>
-      <td>${fmt$(t.avgTicket)}</td>
-      <td><span class="pill ${pill}">${fmtPct(t.closeRate)}</span></td>
-      <td>${t.memberships}</td>
+      <td class="rev-bar-cell"><div class="mini-bar-row"><div class="mini-bar-fill" style="width:${barPct}%"></div></div></td>
+      <td>${t.demandCalls}</td>
+      <td>${fmt$(t.avgSale)}</td>
+      <td><span class="pill ${cPill}">${fmtPct(t.conversionRate)}</span></td>
+      <td>${t.soldHours}</td>
+      <td>${eff}</td>
+      <td>${opts}</td>
     </tr>`;
   }).join('');
 }
 
 function renderMiniPanels(techs) {
-  // Avg Ticket
-  renderMiniBars('panel-avg-ticket', techs, 'avgTicket',   t => fmt$(t.avgTicket),   '#E8600A', '#FF7722');
-  // Jobs
-  renderMiniBars('panel-jobs',       techs, 'jobs',        t => t.jobs,              '#3498DB', '#5DADE2');
-  // Memberships
-  renderMiniBars('panel-memberships',techs, 'memberships', t => t.memberships,       '#9B59B6', '#BB8FCE');
+  renderMiniBars('panel-rpbh',       techs, 'revPerBillHr',  t => fmt$(t.revPerBillHr), '#E8600A', '#FF7722');
+  renderMiniBars('panel-efficiency', techs, 'efficiency',    t => fmtPct(t.efficiency), '#3498DB', '#5DADE2');
+  renderMiniBars('panel-spp',        techs, 'sppCalls',      t => t.sppCalls,           '#9B59B6', '#BB8FCE');
 }
 
-function renderMiniBars(containerId, techs, key, valFn, c1, c2) {
+function renderMiniBars(id, techs, key, valFn, c1, c2) {
   const sorted = [...techs].sort((a, b) => b[key] - a[key]);
   const max    = sorted[0]?.[key] || 1;
-  const el     = document.getElementById(containerId);
-  el.innerHTML = sorted.map(t => {
-    const pct = clamp((t[key] / max) * 100, 0, 100);
+  document.getElementById(id).innerHTML = sorted.map(t => {
+    const pct   = clampN((t[key] / max) * 100, 0, 100);
     const short = t.name.split(' ')[0];
     return `<div class="mini-bar-item">
       <span class="mini-bar-label">${short}</span>
@@ -908,15 +699,13 @@ function renderMiniBars(containerId, techs, key, valFn, c1, c2) {
 
 function renderLeaders(techs) {
   const sorted = [...techs].sort((a, b) => b.revenue - a.revenue).slice(0, 8);
-  const el = document.getElementById('leader-body');
-  el.innerHTML = sorted.map((t, i) => {
-    const m = medalsFor(i);
-    const jobs = t.jobs;
+  document.getElementById('leader-body').innerHTML = sorted.map((t, i) => {
+    const m = medalFor(i);
     return `<div class="leader-item">
-      <span class="medal">${m.icon || (i + 1)}</span>
+      <span class="medal">${m.icon || (i+1)}</span>
       <div class="leader-info">
         <div class="leader-name">${t.name}</div>
-        <div class="leader-sub">${jobs} jobs · ${fmt$(t.avgTicket)} avg</div>
+        <div class="leader-sub">${t.demandCalls} calls · ${fmt$(t.avgSale)} avg</div>
       </div>
       <div class="leader-rev">${fmt$(t.revenue)}</div>
     </div>`;
@@ -924,18 +713,18 @@ function renderLeaders(techs) {
 }
 
 function renderChart(techs) {
-  const sorted = [...techs].sort((a, b) => b.closeRate - a.closeRate).slice(0, 8);
-  const max    = sorted[0]?.closeRate || 1;
-  const el     = document.getElementById('chart-body');
-  el.innerHTML = sorted.map(t => {
-    const pct  = clamp((t.closeRate / max) * 100, 0, 100);
+  const sorted = [...techs].sort((a, b) => b.conversionRate - a.conversionRate).slice(0, 8);
+  const max    = sorted[0]?.conversionRate || 1;
+  document.getElementById('chart-body').innerHTML = sorted.map(t => {
+    const pct   = clampN((t.conversionRate / max) * 100, 0, 100);
+    const color = t.conversionRate >= 60 ? '#2ECC71' : t.conversionRate >= 40 ? '#F39C12' : '#E74C3C';
     const short = t.name.split(' ')[0];
     return `<div class="chart-bar-item">
       <span class="chart-bar-label">${short}</span>
       <div class="chart-bar-track">
-        <div class="chart-bar-fill" style="width:${pct}%"></div>
+        <div class="chart-bar-fill" style="width:${pct}%;background:${color}"></div>
       </div>
-      <span class="chart-bar-val">${fmtPct(t.closeRate)}</span>
+      <span class="chart-bar-val" style="color:${color}">${fmtPct(t.conversionRate)}</span>
     </div>`;
   }).join('');
 }
@@ -957,39 +746,50 @@ function renderAll(techs) {
   renderFooter();
 }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // DATA LOAD
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 async function loadData() {
   try {
-    const res = await fetch(CSV_URL, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const text  = await res.text();
-    const rows  = parseCSV(text);
-    const techs = buildTechs(rows);
+    const [res1, res2] = await Promise.all([
+      fetch(CSV_SHEET1, { cache: 'no-store' }),
+      fetch(CSV_SHEET2, { cache: 'no-store' }),
+    ]);
 
-    if (techs.length === 0) throw new Error('No technician data found in sheet.');
+    if (!res1.ok) throw new Error(`Sheet1 fetch failed — HTTP ${res1.status}`);
+    if (!res2.ok) throw new Error(`Sheet2 fetch failed — HTTP ${res2.status}`);
 
-    renderAll(techs);
+    const [text1, text2] = await Promise.all([res1.text(), res2.text()]);
+
+    const rows1      = parseCSV(text1);
+    const rows2      = parseCSV(text2);
+    const techs      = buildSheet1(rows1);
+    const optionsMap = buildSheet2Map(rows2);
+    const joined     = joinData(techs, optionsMap);
+
+    if (joined.length === 0) throw new Error('No active technician rows found in Sheet1.');
+
+    renderAll(joined);
     hideOverlay();
   } catch (err) {
     showError(err.message);
-    console.error('Dashboard load error:', err);
+    console.error('Dashboard error:', err);
   }
 }
 
 function hideOverlay() {
   document.getElementById('overlay').classList.add('hidden');
 }
+
 function showError(msg) {
   const e = document.getElementById('error-msg');
   e.style.display = 'block';
-  e.textContent   = '⚠ Error loading data: ' + msg + ' — Check CSV URL or network.';
+  e.textContent   = '⚠ ' + msg;
 }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 loadData();
 setInterval(loadData, REFRESH_MS);
 </script>

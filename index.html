@@ -145,7 +145,7 @@
   }
   #left-col {
     display:grid;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 1fr 28%;
     gap: clamp(4px,.55vw,9px);
     min-height:0;
   }
@@ -160,7 +160,7 @@
   }
   .panel-title {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(8px,1vw,15px); font-weight:800;
+    font-size:clamp(10px,1.2vw,18px); font-weight:800;
     text-transform:uppercase; letter-spacing:.08em; color:var(--text);
   }
   .sorted-badge {
@@ -177,9 +177,9 @@
   table { width:100%; border-collapse:collapse; table-layout:fixed; }
   thead th {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(6px,.78vw,11px); font-weight:800;
+    font-size:clamp(8px,1vw,14px); font-weight:800;
     text-transform:uppercase; letter-spacing:.07em; color:var(--text2);
-    padding: clamp(2px,.35vh,5px) clamp(5px,.6vw,9px);
+    padding: clamp(3px,.4vh,6px) clamp(5px,.6vw,9px);
     text-align:right; background:rgba(255,255,255,.03);
     border-bottom:1px solid var(--border);
     position:sticky; top:0; z-index:1;
@@ -190,17 +190,17 @@
   tbody tr:hover { background:rgba(255,255,255,.04); }
   tbody td {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(8px,1vw,15px); font-weight:700;
-    padding: clamp(2px,.3vh,4px) clamp(5px,.6vw,9px);
+    font-size:clamp(11px,1.35vw,20px); font-weight:700;
+    padding: clamp(3px,.45vh,7px) clamp(5px,.6vw,9px);
     text-align:right; color:var(--text);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
   tbody td:first-child { text-align:left; font-weight:800; }
   .rank-num {
     display:inline-flex; align-items:center; justify-content:center;
-    width:clamp(13px,1.4vw,20px); height:clamp(13px,1.4vw,20px);
-    border-radius:50%; font-size:clamp(6px,.78vw,11px); font-weight:900;
-    background:rgba(255,255,255,.08); color:var(--text2); margin-right:3px; flex-shrink:0;
+    width:clamp(16px,1.7vw,24px); height:clamp(16px,1.7vw,24px);
+    border-radius:50%; font-size:clamp(8px,.95vw,14px); font-weight:900;
+    background:rgba(255,255,255,.08); color:var(--text2); margin-right:4px; flex-shrink:0;
   }
   .rank-num.gold   { background:rgba(255,215,0,.2);  color:#FFD700; }
   .rank-num.silver { background:rgba(192,192,192,.2);color:#C0C0C0; }
@@ -214,29 +214,29 @@
   #bottom-panels {
     display:grid; grid-template-columns:1fr 1fr 1fr;
     gap:clamp(4px,.55vw,9px);
-    height:clamp(90px,13vh,185px); flex-shrink:0;
+    min-height:0;
   }
   .mini-panel { background:var(--card); border-radius:6px; overflow:hidden; display:flex; flex-direction:column; }
   .mini-panel .panel-header { padding:clamp(2px,.35vh,5px) clamp(5px,.7vw,11px); }
   .mini-bars-body {
-    flex:1; padding:clamp(2px,.28vh,4px) clamp(5px,.7vw,11px);
+    flex:1; padding:clamp(4px,.5vh,8px) clamp(6px,.8vw,12px);
     display:flex; flex-direction:column; justify-content:space-evenly; min-height:0;
   }
   .mini-bar-item {
     display:grid;
-    grid-template-columns:clamp(55px,7.5vw,105px) 1fr clamp(28px,3.8vw,58px);
+    grid-template-columns:clamp(65px,9vw,125px) 1fr clamp(34px,4.5vw,68px);
     align-items:center; gap:clamp(3px,.38vw,6px);
   }
   .mini-bar-label {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(6px,.78vw,11px); font-weight:800; color:var(--text);
+    font-size:clamp(9px,1.05vw,15px); font-weight:800; color:var(--text);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  .mini-bar-track { height:clamp(4px,.6vh,9px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+  .mini-bar-track { height:clamp(6px,.85vh,12px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
   .mini-bar-fill2 { height:100%; border-radius:2px; transition:width .6s ease; }
   .mini-bar-val {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(6px,.8vw,11px); font-weight:900; text-align:right; color:var(--text);
+    font-size:clamp(9px,1.05vw,15px); font-weight:900; text-align:right; color:var(--text);
   }
 
   /* ── RIGHT SIDEBAR ── */
@@ -256,13 +256,13 @@
   .leader-info { flex:1; min-width:0; }
   .leader-name {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(8px,1vw,16px); font-weight:800; color:var(--text);
+    font-size:clamp(11px,1.3vw,20px); font-weight:800; color:var(--text);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1;
   }
-  .leader-sub { font-size:clamp(5px,.68vw,9px); color:var(--text2); font-weight:700; }
+  .leader-sub { font-size:clamp(7px,.82vw,12px); color:var(--text2); font-weight:700; }
   .leader-rev {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(9px,1.1vw,18px); font-weight:900; color:var(--orange);
+    font-size:clamp(12px,1.4vw,22px); font-weight:900; color:var(--orange);
     flex-shrink:0; text-align:right; line-height:1;
   }
 
@@ -272,19 +272,19 @@
   }
   .chart-bar-item {
     display:grid;
-    grid-template-columns:clamp(50px,6.5vw,95px) 1fr clamp(26px,3.2vw,50px);
+    grid-template-columns:clamp(60px,8vw,115px) 1fr clamp(32px,4vw,60px);
     align-items:center; gap:clamp(3px,.38vw,6px);
   }
   .chart-bar-label {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(6px,.8vw,12px); font-weight:800; color:var(--text);
+    font-size:clamp(9px,1.05vw,15px); font-weight:800; color:var(--text);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
-  .chart-bar-track { height:clamp(5px,.72vh,11px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+  .chart-bar-track { height:clamp(7px,.9vh,13px); background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
   .chart-bar-fill { height:100%; border-radius:2px; transition:width .6s ease; }
   .chart-bar-val {
     font-family:'Barlow Condensed',sans-serif;
-    font-size:clamp(6px,.8vw,12px); font-weight:900; text-align:right;
+    font-size:clamp(9px,1.05vw,15px); font-weight:900; text-align:right;
   }
 
   /* ── FOOTER ── */
